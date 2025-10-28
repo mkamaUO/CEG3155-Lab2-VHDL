@@ -66,7 +66,7 @@ ARCHITECTURE rtl OF datapath IS
   
   SIGNAL int_product              : STD_LOGIC_VECTOR(2*WIDTH downto 0);
   SIGNAL int_remainder            : STD_LOGIC_VECTOR(2*WIDTH downto 0);
-  SIGNAL int_remainder_5bitright  : STD_LOGIC_VECTOR(WIDTH downto 0);
+  SIGNAL int_remainder_right      : STD_LOGIC_VECTOR(WIDTH downto 0);
   SIGNAL int_MSB_remainder        : STD_LOGIC;
   SIGNAL int_LSB_remainder        : STD_LOGIC;
   SIGNAL int_sign_change          : STD_LOGIC;
@@ -93,7 +93,7 @@ BEGIN
         i_A => int_A(i),
         i_B => int_B(i),
         i_C => int_remainder(WIDTH+i),
-        i_D => int_remainder_5bitright(i), -- we can't just take the last 4 bits in 5 bit full adder
+        i_D => int_remainder_right(i), 
         i_s0 => i_select2(0),
         i_s1 => i_select2(1),
         o => int_fA_Op2(i)
@@ -288,6 +288,7 @@ BEGIN
   status_signB <= i_operandB(WIDTH-1);
   
   status_MSB_remainder <= int_MSB_remainder;
+
   
   -- Output Drivers
   o_MuxOut <= int_MuxOut;
